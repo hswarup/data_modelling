@@ -1,0 +1,62 @@
+
+CREATE TABLE account
+(
+	account_ID           INTEGER NOT NULL,
+	account_code         VARCHAR(20) NULL,
+	account_desc         VARCHAR(20) NULL,
+	account_active_flag  VARCHAR(20) NULL,
+	create_ts            VARCHAR(20) NULL,
+	update_ts            VARCHAR(20) NULL,
+	customer_ID          INTEGER NOT NULL,
+	PRIMARY KEY (account_ID,customer_ID)
+);
+
+CREATE TABLE banker
+(
+	banker_first_name    VARCHAR(20) NULL,
+	banker_middle_name   VARCHAR(20) NULL,
+	banker_last_name     VARCHAR(20) NULL,
+	banker_branch_address VARCHAR(20) NULL,
+	banker_active_flag   VARCHAR(20) NULL,
+	create_ts            VARCHAR(20) NULL,
+	update_ts            VARCHAR(20) NULL,
+	banker_type          VARCHAR(20) NULL,
+	banker_dob           VARCHAR(20) NULL,
+	customer_ID          INTEGER NOT NULL,
+	banker_ID            INTEGER NOT NULL,
+	PRIMARY KEY (customer_ID,banker_ID)
+);
+
+CREATE TABLE customer
+(
+	customer_ID          INTEGER NOT NULL,
+	customer_first_name  VARCHAR(20) NULL,
+	customer_middle_name VARCHAR(20) NULL,
+	customer_last_name   VARCHAR(20) NULL,
+	customer_dob         VARCHAR(20) NULL,
+	customer_address     VARCHAR(20) NULL,
+	customer_active_flag VARCHAR(20) NULL,
+	create_ts            VARCHAR(20) NULL,
+	update_ts            VARCHAR(20) NULL,
+	PRIMARY KEY (customer_ID)
+);
+
+CREATE TABLE kyc_check
+(
+	document_type        VARCHAR(20) NULL,
+	check_perform_date   VARCHAR(20) NULL,
+	create_ts            VARCHAR(20) NULL,
+	update_ts            VARCHAR(20) NULL,
+	kyc_check_ID         INTEGER NOT NULL,
+	customer_ID          INTEGER NOT NULL,
+	PRIMARY KEY (kyc_check_ID,customer_ID)
+);
+
+ALTER TABLE account
+ADD CONSTRAINT R_4 FOREIGN KEY (customer_ID) REFERENCES customer (customer_ID);
+
+ALTER TABLE banker
+ADD CONSTRAINT R_5 FOREIGN KEY (customer_ID) REFERENCES customer (customer_ID);
+
+ALTER TABLE kyc_check
+ADD CONSTRAINT R_6 FOREIGN KEY (customer_ID) REFERENCES customer (customer_ID);
