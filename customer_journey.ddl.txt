@@ -1,3 +1,4 @@
+-- This file is generated using Forward Engineering Schema Generation Feature in Erwin
 
 CREATE TABLE account
 (
